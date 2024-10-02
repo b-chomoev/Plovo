@@ -1,9 +1,10 @@
+import UberEats from './containers/UberEats/UberEats.tsx';
+
 const App = () => {
+
   return (
-    <>
-      Hello World
-    </>
-    )
+    <UberEats/>
+  )
 };
 
 export default App;
