@@ -11,6 +11,11 @@ const UberEats = () => {
     {id: '3', name: 'Burger', description: 'American', price: 18, urlImage: 'https://images.stockcake.com/public/0/7/b/07bf10f9-4c26-417a-8eea-65598e4cf063_medium/juicy-cheeseburger-delight-stockcake.jpg'},
   ]);
 
+  const addNewDish = (newDish: IDish) => {
+    console.log(newDish);
+    setDishes(prevState => [...prevState, newDish]);
+  }
+
   return (
     <>
       <header>
@@ -19,7 +24,7 @@ const UberEats = () => {
       <main className='container mt-4'>
         <div className='row'>
           <div className='col-4 mb-2'>
-            <DishForm />
+            <DishForm addNewDish={addNewDish}/>
           </div>
           <div className='col-4 mb-2'>
             <Dishes dishes={dishes}/>
