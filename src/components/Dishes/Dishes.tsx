@@ -1,9 +1,17 @@
+import React from 'react';
+import DishItem from './DishItem.tsx';
 
-const Dishes = () => {
+interface Props {
+  dishes: IDish[];
+}
+
+const Dishes: React.FC<Props> = ({dishes}) => {
   return (
-    <div>
-      Menu Items is going to be here.
-    </div>
+    <>
+      {dishes.map(dish => (
+        <DishItem key={dish.id} dish={dish} />
+      ))}
+    </>
   );
 };
 
