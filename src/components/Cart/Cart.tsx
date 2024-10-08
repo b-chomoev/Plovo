@@ -7,6 +7,14 @@ interface Props {
 }
 
 const Cart: React.FC<Props> = ({cart}) => {
+  const total = cart.reduce((acc, cartDish) => {
+    acc = acc + cartDish.dish.price * cartDish.amount;
+
+    return acc;
+  }, 0);
+
+
+
   return (
     <div>
       <h4>Cart</h4>
@@ -19,7 +27,7 @@ const Cart: React.FC<Props> = ({cart}) => {
 
       <div className='row align-items-center justify-content-between'>
         <div className='text-start col-4 p-0'><p><strong>Total: </strong></p></div>
-        <div className='text-end col-4 p-0'><p>50$</p></div>
+        <div className='text-end col-4 p-0'><p>{total}$</p></div>
       </div>
     </div>
   );
