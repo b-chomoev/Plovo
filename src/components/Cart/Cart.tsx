@@ -29,7 +29,8 @@ const Cart: React.FC<Props> = ({cart}) => {
           <div className="text-start col-4 p-0"><p><strong>Total: </strong></p></div>
           <div className="text-end col-4 p-0"><p>{total}$</p></div>
         </div>
-      </div>)
+      </div>
+    )
   }
 
   return (

@@ -4,9 +4,11 @@ import DishForm from './components/DishForm/DishForm.tsx';
 import Dishes from './components/Dishes/Dishes.tsx';
 import Cart from './components/Cart/Cart.tsx';
 import { DishCart, IDish } from './types';
+import Modal from './components/UI/Modal/Modal.tsx';
 
 const App = () => {
   const [cart, setCart] = useState<DishCart[]>([]);
+  const [showModal, setShowModal] = useState(false);
   const [dishes, setDishes] = useState<IDish[]>([
     {
       id: "1",
@@ -39,7 +41,6 @@ const App = () => {
   };
 
   const addDishToCart = (dish: IDish) => {
-    console.log(dish);
     setCart(prevState => {
       const indexDish = prevState.findIndex(dishCart => dishCart.dish === dish);
 
@@ -56,8 +57,14 @@ const App = () => {
     })
   }
 
+  const closeModalWindow = () => {
+    setShowModal(!showModal);
+    console.log('Clicked');
+  }
+
   return (
     <>
+      <Modal show={showModal} title='Your order' closeModal={closeModalWindow}></Modal>
       <header>
         <ToolBar />
       </header>
@@ -67,10 +74,11 @@ const App = () => {
             <DishForm addNewDish={addNewDish} />
           </div>
           <div className="col-4 mb-2">
-            <Dishes dishes={dishes} addToCart={addDishToCart}/>
+            <Dishes dishes={dishes} addToCart={addDishToCart} />
           </div>
           <div className="col-4 mb-2">
-            <Cart cart={cart}/>
+            <Cart cart={cart} />
+            <button className='btn btn-dark' onClick={() => setShowModal(!showModal)}>Order</button>
           </div>
         </div>
       </main>
