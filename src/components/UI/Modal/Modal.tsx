@@ -12,7 +12,7 @@ const Modal: React.FC<Props> = ({show, title, closeModal, children}) => {
   return (
       <>
         <BackDrop show={show} />
-        <div className="modal show" style={{display: show ? 'block' : 'none'}}>
+        <div className="modal show" style={{display: show ? 'block' : 'none'}} onClick={closeModal}>
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">

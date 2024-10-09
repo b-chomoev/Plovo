@@ -64,7 +64,7 @@ const App = () => {
 
   return (
     <>
-      <Modal show={showModal} title='Your order' closeModal={closeModalWindow}></Modal>
+      <Modal show={showModal} title='Your order' closeModal={closeModalWindow} />
       <header>
         <ToolBar />
       </header>

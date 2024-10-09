@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-interface Props {
+interface Props extends PropsWithChildren{
   show: boolean;
 }
 
