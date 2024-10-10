@@ -1,15 +1,15 @@
-import React, { PropsWithChildren } from 'react';
+import * as React from 'react';
 
-interface Props extends PropsWithChildren{
+interface Props {
   show: boolean;
+  onClick: React.MouseEventHandler;
 }
 
-const BackDrop: React.FC<Props> = ({ show }) => {
+const Backdrop: React.FC<Props> = ({show, onClick}) => {
+
   return (
-    <div>
-      <div className="modal-backdrop show" style={{display: show ? 'block' : 'none'}}/>
-    </div>
+    <div onClick={onClick} className="modal-backdrop show" style={{display: show ? 'block' : 'none'}} />
   );
 };
 
-export default BackDrop;
+export default Backdrop;
