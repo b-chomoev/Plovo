@@ -4,6 +4,7 @@ import { DishCart, IDish } from './types';
 import Home from './containers/Home/Home.tsx';
 import NewDish from './containers/NewDish/NewDish.tsx';
 import { Route, Routes } from 'react-router-dom';
+import CheckOut from './containers/CheckOut/CheckOut.tsx';
 
 const App = () => {
   const [cart, setCart] = useState<DishCart[]>([]);
@@ -67,6 +68,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home dishes={dishes} addDishToCart={addDishToCart} cart={cart} />}></Route>
             <Route path='/newDish' element={<NewDish addNewDish={addNewDish} />}></Route>
+            <Route path='/checkout' element={<CheckOut />}></Route>
             <Route path='*' element={<h1>Not Found</h1>}></Route>
           </Routes>
         </div>

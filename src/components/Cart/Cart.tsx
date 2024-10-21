@@ -1,52 +1,29 @@
-import CartItem from './CartItem.tsx';
 import { DishCart } from '../../types';
 import React, { useState } from 'react';
 import Modal from '../UI/Modal/Modal.tsx';
+import CartDishes from './CartDishes/CartDishes.tsx';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   cart: DishCart[];
 }
 
 const Cart: React.FC<Props> = ({cart}) => {
-  const total = cart.reduce((acc, cartDish) => {
-    acc = acc + cartDish.dish.price * cartDish.amount;
-
-    return acc;
-  }, 0);
-
   const [showModal, setShowModal] = useState(false);
-  const closeModalWindow = () => {
-    setShowModal(!showModal);
-  }
-
-  let cartList = (
-    <>
-      <h6 className="text-center my-4">Oooopsss... there is no dish in your order!</h6>
-    </>
-  );
-
-  if (cart.length > 0) {
-    cartList = (
-      <div>
-        {cart.map(cartDish => (
-          <CartItem key={cartDish.dish.id} cartDish={cartDish}/>
-        ))}
-        <div className="row align-items-center justify-content-between">
-          <div className="text-start col-4 p-0"><p><strong>Total: </strong></p></div>
-          <div className="text-end col-4 p-0"><p>{total}$</p></div>
-        </div>
-      </div>
-    )
-  }
+  const navigate = useNavigate();
 
   return (
     <div>
-      <Modal show={showModal} title='Your order' closeModal={closeModalWindow}>
-        Order details
+      <Modal show={showModal} title='Your order' closeModal={() => setShowModal(false)}>
+        Confirm your order, please!
+        <div>
+          <button className='btn btn-dark' onClick={() => navigate('/checkout')}>Continue</button>
+        </div>
       </Modal>
 
       <h4>Cart</h4>
-      {cartList}
+      <CartDishes cart={cart}/>
+      <button className='btn btn-dark' onClick={() => setShowModal(true)}>Order</button>
     </div>
   );
 };

@@ -17,7 +17,6 @@ const Home: React.FC<Props> = ({dishes, addDishToCart, cart}) => {
       </div>
       <div className="col-4 mb-2">
         <Cart cart={cart}/>
-        {/*<button className='btn btn-dark' onClick={() => setShowModal(!showModal)}>Order</button>*/}
       </div>
     </>
   );

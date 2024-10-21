@@ -22,7 +22,7 @@ const Modal: React.FC<Props> = ({show, title = 'Modal title', children, closeMod
               {children}
             </div>
             <div className="modal-footer">
-              <button onClick={closeModal} className="btn btn-dark" type="button">Close</button>
+              <button onClick={closeModal} className="btn btn-danger" type="button">Close</button>
             </div>
           </div>
         </div>
