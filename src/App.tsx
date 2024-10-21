@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import ToolBar from './components/ToolBar/ToolBar.tsx';
-import DishForm from './components/DishForm/DishForm.tsx';
-import Dishes from './components/Dishes/Dishes.tsx';
-import Cart from './components/Cart/Cart.tsx';
 import { DishCart, IDish } from './types';
 import Modal from './components/UI/Modal/Modal.tsx';
+import Home from './containers/Home/Home.tsx';
+import NewDish from './containers/NewDish/NewDish.tsx';
+import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
   const [cart, setCart] = useState<DishCart[]>([]);
@@ -59,7 +59,6 @@ const App = () => {
 
   const closeModalWindow = () => {
     setShowModal(!showModal);
-    console.log('Clicked');
   }
 
   return (
@@ -72,16 +71,11 @@ const App = () => {
       </header>
       <main className="container mt-4">
         <div className="row">
-          <div className="col-4 mb-2">
-            <DishForm addNewDish={addNewDish} />
-          </div>
-          <div className="col-4 mb-2">
-            <Dishes dishes={dishes} addToCart={addDishToCart} />
-          </div>
-          <div className="col-4 mb-2">
-            <Cart cart={cart} />
-            <button className='btn btn-dark' onClick={() => setShowModal(!showModal)}>Order</button>
-          </div>
+          <Routes>
+            <Route path='/' element={<Home dishes={dishes} addDishToCart={addDishToCart} cart={cart} />}></Route>
+            <Route path='/newDish' element={<NewDish addNewDish={addNewDish} />}></Route>
+            <Route path='*' element={<h1>Not Found</h1>}></Route>
+          </Routes>
         </div>
       </main>
     </>

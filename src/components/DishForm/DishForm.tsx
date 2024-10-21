@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { IDish, IDishMutation } from '../../types';
 
 interface Props {
   addNewDish: (newDish: IDish) => void;
 }
 
 const DishForm: React.FC<Props> = ({ addNewDish }) => {
-  const [newDish, setNewDish] = useState<IDishMutation>({
+  const [newDish, setNewDish] =useState<IDishMutation>({
     name: "",
     description: "",
     price: 0,
@@ -45,7 +46,7 @@ const DishForm: React.FC<Props> = ({ addNewDish }) => {
   return (
     <form onSubmit={onSubmit}>
       <h3>Add new dish</h3>
-      <div className="form-group mb-2">
+      <div className="form-groupmb-2 d-flex">
         <label htmlFor="name">Title:</label>
         <input
           type="text"
