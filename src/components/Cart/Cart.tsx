@@ -1,6 +1,7 @@
 import CartItem from './CartItem.tsx';
 import { DishCart } from '../../types';
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from '../UI/Modal/Modal.tsx';
 
 interface Props {
   cart: DishCart[];
@@ -12,6 +13,11 @@ const Cart: React.FC<Props> = ({cart}) => {
 
     return acc;
   }, 0);
+
+  const [showModal, setShowModal] = useState(false);
+  const closeModalWindow = () => {
+    setShowModal(!showModal);
+  }
 
   let cartList = (
     <>
@@ -35,6 +41,10 @@ const Cart: React.FC<Props> = ({cart}) => {
 
   return (
     <div>
+      <Modal show={showModal} title='Your order' closeModal={closeModalWindow}>
+        Order details
+      </Modal>
+
       <h4>Cart</h4>
       {cartList}
     </div>

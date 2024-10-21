@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import ToolBar from './components/ToolBar/ToolBar.tsx';
 import { DishCart, IDish } from './types';
-import Modal from './components/UI/Modal/Modal.tsx';
 import Home from './containers/Home/Home.tsx';
 import NewDish from './containers/NewDish/NewDish.tsx';
 import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
   const [cart, setCart] = useState<DishCart[]>([]);
-  const [showModal, setShowModal] = useState(false);
   const [dishes, setDishes] = useState<IDish[]>([
     {
       id: "1",
@@ -57,15 +55,10 @@ const App = () => {
     })
   }
 
-  const closeModalWindow = () => {
-    setShowModal(!showModal);
-  }
+
 
   return (
     <>
-      <Modal show={showModal} title='Your order' closeModal={closeModalWindow}>
-        Order details
-      </Modal>
       <header>
         <ToolBar />
       </header>
