@@ -46,7 +46,7 @@ const DishForm: React.FC<Props> = ({ addNewDish }) => {
   return (
     <form onSubmit={onSubmit}>
       <h3>Add new dish</h3>
-      <div className="form-groupmb-2 d-flex">
+      <div className="form-group mb-2">
         <label htmlFor="name">Title:</label>
         <input
           type="text"

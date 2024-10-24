@@ -1,8 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { DishCart, IOrderMutation } from '../../types';
+import axiosAPI from '../../axiosAPI.ts';
 
-const Order = () => {
-  const onFormSubmit = (e: React.FormEvent)=> {
+interface Props {
+  cart: DishCart[];
+}
+
+const initialStateToCustomer = {
+  name: '',
+  address: '',
+  phone: ''
+};
+
+const Order: React.FC<Props> = ({cart}) => {
+  const [customer, setCustomer] = useState(initialStateToCustomer);
+
+  const onChangeField = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+
+    setCustomer(prevState => {
+      return {
+        ...prevState,
+        [name]: value
+      };
+    });
+  };
+
+  const onFormSubmit = async (e: React.FormEvent)=> {
     e.preventDefault();
+
+    const order = {
+      customer: {...customer},
+      dishes: {...cart},
+    };
+
+    await axiosAPI.post<IOrderMutation>('orders.json', order);
+
+    console.log(order);
+    setCustomer(initialStateToCustomer);
   };
 
   return (
@@ -14,6 +49,8 @@ const Order = () => {
               <label htmlFor="name">Client name</label>
               <input
                 id="name" type="text" name="name"
+                value={customer.name}
+                onChange={onChangeField}
                 className="form-control"
               />
             </div>
@@ -22,6 +59,8 @@ const Order = () => {
               <label htmlFor="address">Address</label>
               <input
                 id="address" type="text" name="address"
+                value={customer.address}
+                onChange={onChangeField}
                 className="form-control"
               />
             </div>
@@ -30,6 +69,8 @@ const Order = () => {
               <label htmlFor="phone">Phone</label>
               <input
                 id="phone" type="text" name="phone"
+                value={customer.phone}
+                onChange={onChangeField}
                 className="form-control"
               />
             </div>
