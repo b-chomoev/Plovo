@@ -1,22 +1,22 @@
 import { NavLink } from 'react-router-dom';
+import './ToolBar.css';
 
 const ToolBar = () => {
   return (
-      <nav className="navbar bg-dark">
+      <nav className="navbar navbar-expand-lg bg-dark">
         <div className="container">
-          <div className='w-100 row rows-cols-2 justify-content-between align-items-center'>
-            <div><NavLink to={'/'}><span className="navbar-brand mb-0 text-white fs-1">Uber Eats</span></NavLink></div>
+            <NavLink to='/' className='text-decoration-none'><span className="nnavbar-brand mb-0 text-white fs-1">Uber Eats</span></NavLink>
+
             <div className="ms-auto">
-              <nav className="navbar navbar-nav row row-cols-2">
-                <li>
-                  <NavLink className="text-white" to="/">Home</NavLink>
+              <ul className="navbar-nav">
+                <li className='nav-item'>
+                  <NavLink className="nav-link" to="/">Home</NavLink>
                 </li>
-                <li>
-                  <NavLink className="text-white" to="/newDish">New Dish</NavLink>
+                <li className='nav-item text-white'>
+                  <NavLink className="nav-link" to="/newDish">New Dish</NavLink>
                 </li>
-              </nav>
+              </ul>
             </div>
-          </div>
         </div>
       </nav>
   );

@@ -1,24 +1,25 @@
 import Dishes from '../../components/Dishes/Dishes.tsx';
 import Cart from '../../components/Cart/Cart.tsx';
 import { DishCart, IDish } from '../../types';
-import React from 'react';
+import * as React from 'react';
 
-interface Props {
+
+interface  Props {
   dishes: IDish[];
-  addDishToCart: (dish: IDish) => void;
+  AddDishToCart: (dish: IDish) => void;
   cart: DishCart[];
 }
 
-const Home: React.FC<Props> = ({dishes, addDishToCart, cart}) => {
+const Home: React.FC<Props> = ({dishes, AddDishToCart, cart}) => {
   return (
-    <>
-      <div className="col-4 mb-2">
-        <Dishes dishes={dishes} addToCart={addDishToCart}/>
+    <div className="row justify-content-between">
+      <div className="col col-md-5 mb-2">
+        <Dishes dishes={dishes} addToCart={AddDishToCart}/>
       </div>
-      <div className="col-4 mb-2">
+      <div className="col col-md-5 mb-2">
         <Cart cart={cart}/>
       </div>
-    </>
+    </div>
   );
 };
 

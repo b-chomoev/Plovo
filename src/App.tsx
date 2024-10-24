@@ -45,17 +45,17 @@ const App = () => {
       const indexDish = prevState.findIndex(dishCart => dishCart.dish === dish);
 
       if (indexDish === -1) {
-        return [...prevState, {dish, amount: 1}]
+        return [...prevState, {dish, amount: 1}];
       } else {
         const cartCopy = [...prevState];
-        const copyDishCart = {...cartCopy[indexDish]}
+        const copyDishCart = {...cartCopy[indexDish]};
         copyDishCart.amount++;
         cartCopy[indexDish] = copyDishCart;
 
         return [...cartCopy];
       }
-    })
-  }
+    });
+  };
 
 
 
@@ -67,12 +67,12 @@ const App = () => {
       <main className="container mt-4">
         <div className="row">
           <Routes>
-            <Route path='/' element={<Home dishes={dishes} addDishToCart={addDishToCart} cart={cart} />}></Route>
-            <Route path='/newDish' element={<NewDish addNewDish={addNewDish} />}></Route>
-            <Route path='/checkout' element={<CheckOut cart={cart}/>}>
-              <Route path='continue' element={<Order/>} />
+            <Route path="/" element={<Home dishes={dishes} AddDishToCart={addDishToCart} cart={cart}/>}/>
+            <Route path="/newDish" element={<NewDish addNewDish={addNewDish}/>}/>
+            <Route path="/checkout" element={<CheckOut cart={cart}/>}>
+              <Route path="continue" element={<Order/>} />
             </Route>
-            <Route path='*' element={<h1>Not Found</h1>}></Route>
+            <Route path="*" element={<h1>Not found</h1>}/>
           </Routes>
         </div>
       </main>

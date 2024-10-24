@@ -5,9 +5,10 @@ interface Props extends React.PropsWithChildren {
   show: boolean;
   title: string;
   closeModal: () => void;
+  defaultModalBtn: boolean;
 }
 
-const Modal: React.FC<Props> = ({show, title = 'Modal title', children, closeModal}) => {
+const Modal: React.FC<Props> = ({show, title = 'Modal title', children, closeModal, defaultModalBtn}) => {
 
   return (
     <>
@@ -22,7 +23,7 @@ const Modal: React.FC<Props> = ({show, title = 'Modal title', children, closeMod
               {children}
             </div>
             <div className="modal-footer">
-              <button onClick={closeModal} className="btn btn-danger" type="button">Close</button>
+              {defaultModalBtn ? <button onClick={closeModal} className="btn btn-danger" type="button">Close</button> : null}
             </div>
           </div>
         </div>

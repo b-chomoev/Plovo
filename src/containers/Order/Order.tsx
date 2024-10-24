@@ -1,21 +1,45 @@
 import React from 'react';
 
 const Order = () => {
-  const onSubmit = (e: React.FormEvent) => {
+  const onFormSubmit = (e: React.FormEvent)=> {
     e.preventDefault();
-  }
+  };
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <div>
-          <input type="text" name='name'/>
+      <div className="row mt-2">
+        <div className="col">
+          <form onSubmit={onFormSubmit}>
+            <div className="form-group">
+              <label htmlFor="name">Client name</label>
+              <input
+                id="name" type="text" name="name"
+                className="form-control"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="address">Address</label>
+              <input
+                id="address" type="text" name="address"
+                className="form-control"
+              />
+            </div>
+
+            <div className="form-group mb-3">
+              <label htmlFor="phone">Phone</label>
+              <input
+                id="phone" type="text" name="phone"
+                className="form-control"
+              />
+            </div>
+            <button type="submit" className="btn btn-dark">
+              Place order
+            </button>
+          </form>
         </div>
-        <div>
-          <input type="text" name='address'/>
-        </div>
-        <button>Order</button>
-      </form>
+
+      </div>
     </div>
   );
 };

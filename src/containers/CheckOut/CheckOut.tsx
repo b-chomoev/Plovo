@@ -1,31 +1,32 @@
-import { DishCart } from '../../types';
-import React, { useEffect } from 'react';
 import CartDishes from '../../components/Cart/CartDishes/CartDishes.tsx';
+import React, { useEffect } from 'react';
+import { DishCart } from '../../types';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 interface Props {
   cart: DishCart[];
 }
 
-const CheckOut: React.FC<Props> = ({cart}) => {
+const Checkout: React.FC<Props> = ({cart}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (cart.length === 0) {
-      navigate('/');
-    }
+    if(cart.length === 0) navigate('/');
   }, [cart.length, navigate]);
 
   return (
     <>
+      <h4>Checkout</h4>
+
       <CartDishes cart={cart}/>
-      <div>
-        <Link to={'/'} className='btn btn-danger'>Cancel</Link>
-        <Link to={'/checkout/continue'} className='btn btn-dark'>Continue</Link>
+
+      <div className="d-flex gap-2">
+        <Link className="btn btn-danger" to="/">Cancel</Link>
+        <Link className="btn btn-dark" to="continue">Continue</Link>
       </div>
       <Outlet/>
     </>
   );
 };
 
-export default CheckOut;
+export default Checkout;
