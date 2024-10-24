@@ -28,3 +28,7 @@ export interface IOrderMutation {
   customer: ICustomer,
   dishes: DishCart[],
 }
+
+export interface IOrderAPI {
+  [id: string]: IOrderMutation;
+}
