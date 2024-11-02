@@ -5,7 +5,7 @@ const ToolBar = () => {
   return (
       <nav className="navbar navbar-expand-lg bg-dark">
         <div className="container">
-            <NavLink to='/' className='text-decoration-none'><span className="nnavbar-brand mb-0 text-white fs-1">Uber Eats</span></NavLink>
+            <NavLink to='/' className='text-decoration-none'><span className="nnavbar-brand mb-0 text-white fs-1">Plovo</span></NavLink>
 
             <div className="ms-auto">
               <ul className="navbar-nav">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DishCart, IOrderMutation } from '../../types';
-import axiosAPI from '../../axiosAPI.ts';
-import Spinner from '../../components/UI/Spinner/Spinner.tsx';
+import axiosAPI from '../../axiosAPI';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {

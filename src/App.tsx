@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import ToolBar from './components/ToolBar/ToolBar.tsx';
+import ToolBar from './components/ToolBar/ToolBar';
 import { DishCart, IDish } from './types';
-import Home from './containers/Home/Home.tsx';
-import NewDish from './containers/NewDish/NewDish.tsx';
+import Home from './containers/Home/Home';
+import NewDish from './containers/NewDish/NewDish';
 import { Route, Routes } from 'react-router-dom';
-import CheckOut from './containers/CheckOut/CheckOut.tsx';
-import Order from './containers/Order/Order.tsx';
+import CheckOut from './containers/CheckOut/CheckOut';
+import Order from './containers/Order/Order';
 
 const App = () => {
   const [cart, setCart] = useState<DishCart[]>([]);
