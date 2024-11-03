@@ -8,6 +8,7 @@ import CheckOut from './containers/CheckOut/CheckOut';
 import Order from './containers/Order/Order';
 import axiosAPI from './axiosAPI';
 import EditDish from './containers/EditDish/EditDish';
+import Orders from './containers/Orders/Orders';
 
 const App = () => {
   const [cart, setCart] = useState<DishCart[]>([]);
@@ -106,6 +107,7 @@ const App = () => {
             <Route path="/checkout" element={<CheckOut cart={cart}/>}>
               <Route path="continue" element={<Order cart={cart} clearCart={clearCart} />} />
             </Route>
+            <Route path="/orders" element={<Orders />} />
             <Route path="*" element={<h1>Not found</h1>}/>
           </Routes>
         </div>
