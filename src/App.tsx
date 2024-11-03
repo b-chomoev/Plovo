@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import ToolBar from './components/ToolBar/ToolBar';
 import { DishCart, DishesList, IDish } from './types';
 import Home from './containers/Home/Home';
 import NewDish from './containers/NewDish/NewDish';
@@ -9,6 +8,7 @@ import Order from './containers/Order/Order';
 import axiosAPI from './axiosAPI';
 import EditDish from './containers/EditDish/EditDish';
 import Orders from './containers/Orders/Orders';
+import Layout from './components/Layout/Layout';
 
 const App = () => {
   const [cart, setCart] = useState<DishCart[]>([]);
@@ -95,23 +95,18 @@ const App = () => {
 
   return (
     <>
-      <header>
-        <ToolBar />
-      </header>
-      <main className="container mt-4">
-        <div className="row">
-          <Routes>
-            <Route path="/" element={<Home dishes={dishes} AddDishToCart={addDishToCart} cart={cart} isLoadingDishes={loading} fetchDishes={fetchDishes}/>}/>
-            <Route path="/newDish" element={<NewDish />}/>
-            <Route path="/editDish/:id" element={<EditDish />}/>
-            <Route path="/checkout" element={<CheckOut cart={cart}/>}>
-              <Route path="continue" element={<Order cart={cart} clearCart={clearCart} />} />
-            </Route>
-            <Route path="/orders" element={<Orders />} />
-            <Route path="*" element={<h1>Not found</h1>}/>
-          </Routes>
-        </div>
-      </main>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home dishes={dishes} AddDishToCart={addDishToCart} cart={cart} isLoadingDishes={loading} fetchDishes={fetchDishes}/>}/>
+          <Route path="/newDish" element={<NewDish />}/>
+          <Route path="/editDish/:id" element={<EditDish />}/>
+          <Route path="/checkout" element={<CheckOut cart={cart}/>}>
+            <Route path="continue" element={<Order cart={cart} clearCart={clearCart} />} />
+          </Route>
+          <Route path="/orders" element={<Orders />} />
+          <Route path="*" element={<h1>Not found</h1>}/>
+        </Routes>
+      </Layout>
     </>
   );
 };
