@@ -50,6 +50,27 @@ const App = () => {
     }
   }, [fetchDishes, location]);
 
+  const updateCart = useCallback(() => {
+    setCart(prevState => {
+      return prevState.map((cartDish) => {
+        const updateDish = dishes.find(dish => dish.id === cartDish.dish.id);
+
+        if (updateDish) {
+          return {
+            ...cartDish,
+            dish: updateDish,
+          };
+        }
+
+        return cartDish;
+      });
+    });
+  }, [dishes]);
+
+  useEffect(() => {
+    void updateCart();
+  }, [updateCart]);
+
   const addDishToCart = (dish: IDish) => {
     setCart(prevState => {
       const indexDish = prevState.findIndex(dishCart => dishCart.dish === dish);

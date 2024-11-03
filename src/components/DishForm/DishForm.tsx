@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ApiDish, IDishMutation } from '../../types';
 
 interface Props {
-  addNewDish?: (newDish: ApiDish) => void;
+  addNewDish: (newDish: ApiDish) => void;
   existingDish?: IDishMutation;
   isEdit?: boolean;
 }
