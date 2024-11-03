@@ -21,7 +21,7 @@ const App = () => {
       const dishesList = responseDishes.data;
       if (dishesList === null) return;
 
-      const dishes: DishesList = responseDishes.data;
+      const dishes: DishesList = dishesList;
 
       const dishesInMyFormat = Object.keys(dishesList).map(dish => {
         return {
@@ -44,10 +44,6 @@ const App = () => {
 
     }
   }, [fetchDishes, location]);
-
-  const addNewDish = (newDish: IDish) => {
-    setDishes((prevState) => [...prevState, newDish]);
-  };
 
   const addDishToCart = (dish: IDish) => {
     setCart(prevState => {
@@ -74,8 +70,8 @@ const App = () => {
       <main className="container mt-4">
         <div className="row">
           <Routes>
-            <Route path="/" element={<Home dishes={dishes} AddDishToCart={addDishToCart} cart={cart}/>}/>
-            <Route path="/newDish" element={<NewDish addNewDish={addNewDish}/>}/>
+            <Route path="/" element={<Home dishes={dishes} AddDishToCart={addDishToCart} cart={cart} isLoadingDishes={loading} />}/>
+            <Route path="/newDish" element={<NewDish />}/>
             <Route path="/checkout" element={<CheckOut cart={cart}/>}>
               <Route path="continue" element={<Order cart={cart}/>} />
             </Route>

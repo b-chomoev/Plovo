@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { IDish, IDishMutation } from '../../types';
+import { ApiDish, IDishMutation } from '../../types';
 
 interface Props {
-  addNewDish: (newDish: IDish) => void;
+  addNewDish: (newDish: ApiDish) => void;
 }
 
 const DishForm: React.FC<Props> = ({ addNewDish }) => {
@@ -29,7 +29,6 @@ const DishForm: React.FC<Props> = ({ addNewDish }) => {
       alert("Fill in the blank");
     } else {
       addNewDish({
-        id: String(new Date()),
         ...newDish,
         price: Number(newDish.price),
       });
