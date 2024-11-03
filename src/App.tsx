@@ -19,7 +19,11 @@ const App = () => {
       setLoading(true);
       const responseDishes: {data: DishesList | null} = await axiosAPI('dishes.json');
       const dishesList = responseDishes.data;
-      if (dishesList === null) return;
+
+      if (dishesList === null) {
+        setDishes([]);
+        return;
+      }
 
       const dishes: DishesList = dishesList;
 
@@ -70,7 +74,7 @@ const App = () => {
       <main className="container mt-4">
         <div className="row">
           <Routes>
-            <Route path="/" element={<Home dishes={dishes} AddDishToCart={addDishToCart} cart={cart} isLoadingDishes={loading} />}/>
+            <Route path="/" element={<Home dishes={dishes} AddDishToCart={addDishToCart} cart={cart} isLoadingDishes={loading} fetchDishes={fetchDishes}/>}/>
             <Route path="/newDish" element={<NewDish />}/>
             <Route path="/checkout" element={<CheckOut cart={cart}/>}>
               <Route path="continue" element={<Order cart={cart}/>} />
