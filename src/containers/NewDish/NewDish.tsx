@@ -3,6 +3,7 @@ import * as React from 'react';
 import { ApiDish } from '../../types';
 import axiosAPI from '../../axiosAPI';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const NewDish = () => {
   const [addLoading, setAddLoading] = React.useState<boolean>(false);
@@ -13,6 +14,7 @@ const NewDish = () => {
       setAddLoading(true);
       await axiosAPI.post('dishes.json', dish);
       navigate('/');
+      toast.success("Dish was added successfully");
     } catch (e) {
       console.error(e);
     } finally {
