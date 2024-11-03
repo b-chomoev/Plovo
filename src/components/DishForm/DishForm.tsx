@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import { ApiDish, IDishMutation } from '../../types';
 
 interface Props {
-  addNewDish: (newDish: ApiDish) => void;
+  addNewDish?: (newDish: ApiDish) => void;
+  existingDish?: IDishMutation;
+  isEdit?: boolean;
 }
 
-const DishForm: React.FC<Props> = ({ addNewDish }) => {
-  const [newDish, setNewDish] =useState<IDishMutation>({
-    name: "",
-    description: "",
-    price: 0,
-    urlImage: "",
-  });
+const initialState = {
+  name: "",
+  description: "",
+  price: 0,
+  urlImage: "",
+};
+
+const DishForm: React.FC<Props> = ({ addNewDish, existingDish = initialState, isEdit = false }) => {
+  const [newDish, setNewDish] =useState<IDishMutation>(existingDish);
 
   const changeDish = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setNewDish((prevState) => {
@@ -33,18 +37,15 @@ const DishForm: React.FC<Props> = ({ addNewDish }) => {
         price: Number(newDish.price),
       });
 
-      setNewDish({
-        name: "",
-        description: "",
-        price: 0,
-        urlImage: "",
-      });
+      if (!isEdit) {
+        setNewDish(initialState);
+      }
     }
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <h3>Add new dish</h3>
+      <h3> {isEdit ? 'Edit dish' : 'Add new dish'}</h3>
       <div className="form-group mb-2">
         <label htmlFor="name">Title:</label>
         <input
@@ -96,7 +97,7 @@ const DishForm: React.FC<Props> = ({ addNewDish }) => {
         />
       </div>
 
-      <button className="btn btn-dark">Add</button>
+      <button className="btn btn-dark">{isEdit ? 'Edit' : 'Add'}</button>
     </form>
   );
 };

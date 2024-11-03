@@ -1,5 +1,6 @@
 import React from "react";
 import { IDish } from '../../types';
+import { NavLink } from 'react-router-dom';
 
 interface Props {
   dish: IDish;
@@ -27,6 +28,7 @@ const DishItem: React.FC<Props> = ({ dish, onAddToCart, onDeleteDish }) => {
         <div className='row justify-content-between row-cols-2'>
           <button className='btn btn-dark' onClick={() => onAddToCart(dish)}>Add to Cart</button>
           <button className='btn btn-danger' onClick={onDeleteDish}>Delete</button>
+          <NavLink to={`/editDish/${dish.id}`} className='btn btn-success'>Edit</NavLink>
         </div>
       </div>
     </div>

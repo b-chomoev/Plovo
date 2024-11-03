@@ -7,6 +7,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import CheckOut from './containers/CheckOut/CheckOut';
 import Order from './containers/Order/Order';
 import axiosAPI from './axiosAPI';
+import EditDish from './containers/EditDish/EditDish';
 
 const App = () => {
   const [cart, setCart] = useState<DishCart[]>([]);
@@ -76,6 +77,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home dishes={dishes} AddDishToCart={addDishToCart} cart={cart} isLoadingDishes={loading} fetchDishes={fetchDishes}/>}/>
             <Route path="/newDish" element={<NewDish />}/>
+            <Route path="/editDish/:id" element={<EditDish />}/>
             <Route path="/checkout" element={<CheckOut cart={cart}/>}>
               <Route path="continue" element={<Order cart={cart}/>} />
             </Route>
