@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ApiDish, IDishMutation } from '../../types';
-import ButtonSpinner from '../UI/ButtonSpinner/ButtonSpinner';
+import ButtonLoading from '../UI/ButtonLoading/ButtonLoading';
 
 interface Props {
   addNewDish: (newDish: ApiDish) => void;
@@ -99,10 +99,12 @@ const DishForm: React.FC<Props> = ({ addNewDish, existingDish = initialState, is
         />
       </div>
 
-      <button disabled={isLoading} className="btn btn-dark d-flex align-items-center">
-        <span className='me-2'>{isEdit ? 'Edit' : 'Add'}</span>
-        {isLoading ? <ButtonSpinner /> : null}
-      </button>
+      <ButtonLoading text={isEdit ? 'Edit' : 'Add'} isLoading={isLoading} isDisabled={isLoading} />
+
+      {/*<button disabled={isLoading} className="btn btn-dark d-flex align-items-center">*/}
+      {/*  <span className='me-2'>{isEdit ? 'Edit' : 'Add'}</span>*/}
+      {/*  {isLoading ? <ButtonSpinner /> : null}*/}
+      {/*</button>*/}
     </form>
   );
 };

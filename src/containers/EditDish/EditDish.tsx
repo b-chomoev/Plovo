@@ -3,11 +3,10 @@ import { useCallback, useEffect, useState } from 'react';
 import axiosAPI from '../../axiosAPI';
 import { ApiDish } from '../../types';
 import DishForm from '../../components/DishForm/DishForm';
-import Spinner from '../../components/UI/Spinner/Spinner';
 
 const EditDish = () => {
   const [dish, setDish] = useState<ApiDish | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
   const navigate = useNavigate();
   const {id} = useParams();
 
@@ -25,21 +24,19 @@ const EditDish = () => {
   const addNewDish = async  (dish: ApiDish) => {
     console.log(dish);
     try {
-      setLoading(true);
+      setEditLoading(true);
       await axiosAPI.put(`dishes/${id}.json`, dish);
       navigate('/');
     } catch (e) {
       console.error(e);
     } finally {
-      setLoading(false);
+      setEditLoading(false);
     }
   };
 
   return dish && (
     <>
-      {loading ? <Spinner /> :
-        <DishForm addNewDish={addNewDish} existingDish={dish} isEdit={true} />
-      }
+      <DishForm addNewDish={addNewDish} existingDish={dish} isEdit={true} isLoading={editLoading}/>
     </>
   );
 };
