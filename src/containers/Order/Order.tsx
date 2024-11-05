@@ -49,9 +49,6 @@ const Order: React.FC<Props> = ({cart, clearCart}) => {
     } finally {
       setLoading(false);
     }
-
-
-    console.log(order);
     setCustomer(initialStateToCustomer);
   };
 

@@ -1,4 +1,4 @@
-import CartDishes from '../../components/Cart/CartDishes/CartDishes.tsx';
+import CartDishes from '../../components/Cart/CartDishes/CartDishes';
 import React, { useEffect } from 'react';
 import { DishCart } from '../../types';
 import { Link, Outlet, useNavigate } from 'react-router-dom';

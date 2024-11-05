@@ -1,7 +1,7 @@
 import { DishCart } from '../../types';
 import React, { useState } from 'react';
-import Modal from '../UI/Modal/Modal.tsx';
-import CartDishes from './CartDishes/CartDishes.tsx';
+import Modal from '../UI/Modal/Modal';
+import CartDishes from './CartDishes/CartDishes';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
