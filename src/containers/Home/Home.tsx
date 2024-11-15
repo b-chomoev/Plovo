@@ -5,15 +5,17 @@ import * as React from 'react';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import axiosAPI from '../../axiosAPI';
 import { useCallback } from 'react';
+import { useAppSelector } from '../../app/hooks';
+import { selectFetchDishesLoading } from '../../store/slices/dishesSlice';
 
 
 interface Props {
   dishes: IDish[];
-  isLoadingDishes?: boolean;
   fetchDishes: () => void;
 }
 
-const Home: React.FC<Props> = ({dishes, isLoadingDishes = false, fetchDishes}) => {
+const Home: React.FC<Props> = ({dishes, fetchDishes}) => {
+  const isLoadingDishes = useAppSelector(selectFetchDishesLoading);
 
   const deleteDish = useCallback(async (id: string) => {
     try {

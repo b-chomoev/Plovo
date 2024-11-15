@@ -14,6 +14,7 @@ const initialState: DishState = {
 };
 
 export const selectDishes = (state: RootState) => state.dishes.dishes;
+export const selectFetchDishesLoading = (state: RootState) => state.dishes.isFetchingLoading;
 
 export const dishesSlice = createSlice({
   name: 'dishes',
