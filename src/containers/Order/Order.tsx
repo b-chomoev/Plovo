@@ -4,7 +4,7 @@ import axiosAPI from '../../axiosAPI';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { clearCart, selectCartDishes } from '../../store/cartSlice';
+import { clearCart, selectCartDishes } from '../../store/slices/cartSlice';
 
 const initialStateToCustomer = {
   name: '',

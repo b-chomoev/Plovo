@@ -1,6 +1,6 @@
-import { DishCart, IDish } from '../types';
+import { DishCart, IDish } from '../../types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../app/store';
+import { RootState } from '../../app/store';
 
 interface CartState {
   cartDishes: DishCart[];

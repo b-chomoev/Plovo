@@ -2,7 +2,7 @@ import Modal from '../UI/Modal/Modal';
 import CartDishes from './CartDishes/CartDishes';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
-import { selectCartDishes } from '../../store/cartSlice';
+import { selectCartDishes } from '../../store/slices/cartSlice';
 import { useState } from 'react';
 
 const Cart= () => {

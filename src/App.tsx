@@ -10,7 +10,7 @@ import EditDish from './containers/EditDish/EditDish';
 import Orders from './containers/Orders/Orders';
 import Layout from './components/Layout/Layout';
 import { useAppDispatch } from './app/hooks';
-import { updateCart } from './store/cartSlice';
+import { updateCart } from './store/slices/cartSlice';
 
 const App = () => {
   const [dishes, setDishes] = useState<IDish[]>([]);

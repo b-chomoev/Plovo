@@ -2,7 +2,7 @@ import React from "react";
 import { IDish } from '../../types';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
-import { addDish } from '../../store/cartSlice';
+import { addDish } from '../../store/slices/cartSlice';
 
 interface Props {
   dish: IDish;

@@ -2,7 +2,7 @@ import CartDishes from '../../components/Cart/CartDishes/CartDishes';
 import { useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
-import { selectCartDishes } from '../../store/cartSlice';
+import { selectCartDishes } from '../../store/slices/cartSlice';
 
 const Checkout = () => {
   const navigate = useNavigate();
