@@ -35,11 +35,24 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.cartDishes = [];
     },
-    updateCart: (state) => {
+    updateCart: (state, {payload: dishes}: PayloadAction<IDish[]>) => {
+      const updateCart = state.cartDishes.map((cartDish) => {
+        const updateDish = dishes.find(dish => dish.id === cartDish.dish.id);
 
+        if (updateDish) {
+          return {
+            ...cartDish,
+            dish: updateDish,
+          };
+        }
+
+        return cartDish;
+      });
+
+      state.cartDishes = updateCart;
     }
   }
 });
 
 export const cartReducer = cartSlice.reducer;
-export const {addDish, clearCart} = cartSlice.actions;
+export const {addDish, clearCart, updateCart} = cartSlice.actions;

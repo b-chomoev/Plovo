@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { DishCart, DishesList, IDish } from './types';
+import { DishesList, IDish } from './types';
 import Home from './containers/Home/Home';
 import NewDish from './containers/NewDish/NewDish';
 import { Route, Routes, useLocation } from 'react-router-dom';
@@ -9,12 +9,14 @@ import axiosAPI from './axiosAPI';
 import EditDish from './containers/EditDish/EditDish';
 import Orders from './containers/Orders/Orders';
 import Layout from './components/Layout/Layout';
+import { useAppDispatch } from './app/hooks';
+import { updateCart } from './store/cartSlice';
 
 const App = () => {
-  const [cart, setCart] = useState<DishCart[]>([]);
   const [dishes, setDishes] = useState<IDish[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   const fetchDishes = useCallback(async () => {
     try {
@@ -37,41 +39,19 @@ const App = () => {
       });
 
       setDishes(dishesInMyFormat);
+      dispatch(updateCart(dishesInMyFormat));
     } catch (e) {
       console.error(e);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (location.pathname === '/') {
       void fetchDishes();
-
     }
   }, [fetchDishes, location]);
-
-  const updateCart = useCallback(() => {
-    setCart(prevState => {
-      return prevState.map((cartDish) => {
-        const updateDish = dishes.find(dish => dish.id === cartDish.dish.id);
-
-        if (updateDish) {
-          return {
-            ...cartDish,
-            dish: updateDish,
-          };
-        }
-
-        return cartDish;
-      });
-    });
-  }, [dishes]);
-
-
-  useEffect(() => {
-    void updateCart();
-  }, [updateCart]);
 
   return (
     <>
