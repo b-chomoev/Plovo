@@ -68,9 +68,6 @@ const App = () => {
     });
   }, [dishes]);
 
-  const clearCart = () => {
-    setCart([]);
-  };
 
   useEffect(() => {
     void updateCart();
@@ -83,8 +80,8 @@ const App = () => {
           <Route path="/" element={<Home dishes={dishes} isLoadingDishes={loading} fetchDishes={fetchDishes}/>}/>
           <Route path="/newDish" element={<NewDish />}/>
           <Route path="/editDish/:id" element={<EditDish />}/>
-          <Route path="/checkout" element={<CheckOut cart={cart}/>}>
-            <Route path="continue" element={<Order cart={cart} clearCart={clearCart} />} />
+          <Route path="/checkout" element={<CheckOut />}>
+            <Route path="continue" element={<Order />} />
           </Route>
           <Route path="/orders" element={<Orders />} />
           <Route path="*" element={<h1>Not found</h1>}/>

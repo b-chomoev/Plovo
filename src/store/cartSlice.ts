@@ -31,9 +31,15 @@ const cartSlice = createSlice({
 
         state.cartDishes = [...cartCopy];
       }
+    },
+    clearCart: (state) => {
+      state.cartDishes = [];
+    },
+    updateCart: (state) => {
+
     }
   }
 });
 
 export const cartReducer = cartSlice.reducer;
-export const {addDish} = cartSlice.actions;
+export const {addDish, clearCart} = cartSlice.actions;

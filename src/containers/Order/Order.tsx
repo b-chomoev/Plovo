@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { DishCart, IOrderMutation } from '../../types';
+import { IOrderMutation } from '../../types';
 import axiosAPI from '../../axiosAPI';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { useNavigate } from 'react-router-dom';
-
-interface Props {
-  cart: DishCart[];
-  clearCart: () => void;
-}
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { clearCart, selectCartDishes } from '../../store/cartSlice';
 
 const initialStateToCustomer = {
   name: '',
@@ -15,10 +12,12 @@ const initialStateToCustomer = {
   phone: ''
 };
 
-const Order: React.FC<Props> = ({cart, clearCart}) => {
+const Order = () => {
   const [customer, setCustomer] = useState(initialStateToCustomer);
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const cart = useAppSelector(selectCartDishes);
+  const dispatch = useAppDispatch();
 
   const onChangeField = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
@@ -42,7 +41,7 @@ const Order: React.FC<Props> = ({cart, clearCart}) => {
     try {
       setLoading(true);
       await axiosAPI.post<IOrderMutation>('orders.json', order);
-      clearCart();
+      dispatch(clearCart());
       navigate('/');
     } catch (e) {
       console.error(e);
