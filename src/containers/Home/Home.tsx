@@ -1,19 +1,26 @@
 import Dishes from '../../components/Dishes/Dishes';
 import Cart from '../../components/Cart/Cart';
-import * as React from 'react';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import axiosAPI from '../../axiosAPI';
-import { useCallback } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useCallback, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectDishes, selectFetchDishesLoading } from '../../store/slices/dishesSlice';
+import { fetchAllDishes } from '../../store/thunks/dishesThunk';
 
-interface Props {
-  fetchDishes: () => void;
-}
-
-const Home: React.FC<Props> = ({fetchDishes}) => {
+const Home = () => {
   const isLoadingDishes = useAppSelector(selectFetchDishesLoading);
   const dishes = useAppSelector(selectDishes);
+  const dispatch = useAppDispatch();
+
+  const fetchDishes = useCallback(async () => {
+    await dispatch(fetchAllDishes());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      void fetchDishes();
+    }
+  }, [fetchDishes]);
 
   const deleteDish = useCallback(async (id: string) => {
     try {

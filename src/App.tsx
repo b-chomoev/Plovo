@@ -1,7 +1,7 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import Home from './containers/Home/Home';
 import NewDish from './containers/NewDish/NewDish';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import CheckOut from './containers/CheckOut/CheckOut';
 import Order from './containers/Order/Order';
 import EditDish from './containers/EditDish/EditDish';
@@ -9,23 +9,11 @@ import Orders from './containers/Orders/Orders';
 import Layout from './components/Layout/Layout';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { updateCart } from './store/slices/cartSlice';
-import { fetchAllDishes } from './store/thunks/dishesThunk';
 import { selectDishes } from './store/slices/dishesSlice';
 
 const App = () => {
-  const location = useLocation();
   const dishes = useAppSelector(selectDishes);
   const dispatch = useAppDispatch();
-
-  const fetchDishes = useCallback(async () => {
-    await dispatch(fetchAllDishes());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (location.pathname === '/') {
-      void fetchDishes();
-    }
-  }, [fetchDishes, location]);
 
   useEffect(() => {
     dispatch(updateCart(dishes));
@@ -35,7 +23,7 @@ const App = () => {
     <>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home fetchDishes={fetchDishes}/>}/>
+          <Route path="/" element={<Home />}/>
           <Route path="/newDish" element={<NewDish />}/>
           <Route path="/editDish/:id" element={<EditDish />}/>
           <Route path="/checkout" element={<CheckOut />}>

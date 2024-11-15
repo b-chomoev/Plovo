@@ -27,7 +27,7 @@ export const dishesSlice = createSlice({
       })
       .addCase(fetchAllDishes.fulfilled, (state, action: PayloadAction<IDish[]>) => {
         state.dishes = action.payload;
-        state.isFetchingLoading = true;
+        state.isFetchingLoading = false;
       })
       .addCase(fetchAllDishes.rejected, state => {
         state.isFetchingLoading = false;
