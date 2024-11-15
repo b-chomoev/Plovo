@@ -80,7 +80,7 @@ const App = () => {
     <>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home dishes={dishes} cart={cart} isLoadingDishes={loading} fetchDishes={fetchDishes}/>}/>
+          <Route path="/" element={<Home dishes={dishes} isLoadingDishes={loading} fetchDishes={fetchDishes}/>}/>
           <Route path="/newDish" element={<NewDish />}/>
           <Route path="/editDish/:id" element={<EditDish />}/>
           <Route path="/checkout" element={<CheckOut cart={cart}/>}>

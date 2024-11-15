@@ -1,6 +1,6 @@
 import Dishes from '../../components/Dishes/Dishes';
 import Cart from '../../components/Cart/Cart';
-import { DishCart, IDish } from '../../types';
+import { IDish } from '../../types';
 import * as React from 'react';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import axiosAPI from '../../axiosAPI';
@@ -9,12 +9,11 @@ import { useCallback } from 'react';
 
 interface Props {
   dishes: IDish[];
-  cart: DishCart[];
   isLoadingDishes?: boolean;
   fetchDishes: () => void;
 }
 
-const Home: React.FC<Props> = ({dishes, cart, isLoadingDishes = false, fetchDishes}) => {
+const Home: React.FC<Props> = ({dishes, isLoadingDishes = false, fetchDishes}) => {
 
   const deleteDish = useCallback(async (id: string) => {
     try {
@@ -36,7 +35,7 @@ const Home: React.FC<Props> = ({dishes, cart, isLoadingDishes = false, fetchDish
             }
           </div>
           <div className="col col-md-5 mb-2">
-            <Cart cart={cart}/>
+            <Cart />
           </div>
         </div>
       }
