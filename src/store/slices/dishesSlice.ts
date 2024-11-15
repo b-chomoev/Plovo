@@ -6,7 +6,7 @@ import { RootState } from '../../app/store';
 interface DishState {
   dishes: IDish[];
   isFetchingLoading: boolean;
-  isDeleteLoading: boolean;
+  isDeleteLoading: boolean | string;
 }
 
 const initialState: DishState = {
@@ -34,8 +34,8 @@ export const dishesSlice = createSlice({
       .addCase(fetchAllDishes.rejected, state => {
         state.isFetchingLoading = false;
       })
-      .addCase(deleteOneDish.pending, state => {
-        state.isDeleteLoading = true;
+      .addCase(deleteOneDish.pending, (state, {meta}) => {
+        state.isDeleteLoading = meta.arg;
       })
       .addCase(deleteOneDish.fulfilled, (state) => {
         state.isDeleteLoading = false;

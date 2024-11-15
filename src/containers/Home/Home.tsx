@@ -1,11 +1,10 @@
 import Dishes from '../../components/Dishes/Dishes';
 import Cart from '../../components/Cart/Cart';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import axiosAPI from '../../axiosAPI';
 import { useCallback, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectDishes, selectFetchDishesLoading } from '../../store/slices/dishesSlice';
-import { fetchAllDishes } from '../../store/thunks/dishesThunk';
+import { deleteOneDish, fetchAllDishes } from '../../store/thunks/dishesThunk';
 
 const Home = () => {
   const isLoadingDishes = useAppSelector(selectFetchDishesLoading);
@@ -23,15 +22,9 @@ const Home = () => {
   }, [fetchDishes]);
 
   const deleteDish = useCallback(async (id: string) => {
-    try {
-      if (window.confirm('Do you want to delete this dish?')) {
-        await axiosAPI.delete(`dishes/${id}.json`);
-        await fetchDishes();
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }, [fetchDishes]);
+    await dispatch(deleteOneDish(id));
+    await fetchDishes();
+  }, [dispatch,fetchDishes]);
 
   return (
     <>
@@ -39,12 +32,12 @@ const Home = () => {
         <div className="row justify-content-between">
           <div className="col col-md-5 mb-2">
             {dishes.length > 0 ?
-              <Dishes dishes={dishes} deleteDish={deleteDish} />
+              <Dishes dishes={dishes} deleteDish={deleteDish}/>
               : <h3>No dishes</h3>
             }
           </div>
           <div className="col col-md-5 mb-2">
-            <Cart />
+            <Cart/>
           </div>
         </div>
       }

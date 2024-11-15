@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { DishesList, IDish } from '../../types';
 import axiosAPI from '../../axiosAPI';
+import { updateCart } from '../slices/cartSlice';
 
 export const fetchAllDishes = createAsyncThunk<IDish[], void>(
   'dishes/fetchAllDishes',
-  async () => {
+  async (_arg, thunkAPI) => {
     const response: {data: DishesList | null} = await axiosAPI('dishes.json');
     const dishesList = response.data;
 
@@ -14,16 +15,19 @@ export const fetchAllDishes = createAsyncThunk<IDish[], void>(
 
     const dishes: DishesList = dishesList;
 
-    return Object.keys(dishesList).map(dish => {
+    const newDishes = Object.keys(dishesList).map(dish => {
       return {
         ...dishes[dish],
         id: dish,
       };
     });
+
+    thunkAPI.dispatch(updateCart(newDishes));
+    return newDishes;
   }
 );
 
-export const deleteOneDish = createAsyncThunk(
+export const deleteOneDish = createAsyncThunk<void, string>(
   'dishes/deleteOneDish',
   async (id: string) => {
     await axiosAPI.delete(`dishes/${id}.json`);
