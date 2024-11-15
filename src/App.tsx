@@ -35,7 +35,7 @@ const App = () => {
     <>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home dishes={dishes} fetchDishes={fetchDishes}/>}/>
+          <Route path="/" element={<Home fetchDishes={fetchDishes}/>}/>
           <Route path="/newDish" element={<NewDish />}/>
           <Route path="/editDish/:id" element={<EditDish />}/>
           <Route path="/checkout" element={<CheckOut />}>
