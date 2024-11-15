@@ -24,8 +24,10 @@ const Home = () => {
 
   const deleteDish = useCallback(async (id: string) => {
     try {
-      await axiosAPI.delete(`dishes/${id}.json`);
-      await fetchDishes();
+      if (window.confirm('Do you want to delete this dish?')) {
+        await axiosAPI.delete(`dishes/${id}.json`);
+        await fetchDishes();
+      }
     } catch (e) {
       console.error(e);
     }

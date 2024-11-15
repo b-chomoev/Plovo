@@ -22,3 +22,10 @@ export const fetchAllDishes = createAsyncThunk<IDish[], void>(
     });
   }
 );
+
+export const deleteOneDish = createAsyncThunk(
+  'dishes/deleteOneDish',
+  async (id: string) => {
+    await axiosAPI.delete(`dishes/${id}.json`);
+  }
+);
