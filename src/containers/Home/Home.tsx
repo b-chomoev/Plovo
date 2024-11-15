@@ -9,13 +9,12 @@ import { useCallback } from 'react';
 
 interface Props {
   dishes: IDish[];
-  AddDishToCart: (dish: IDish) => void;
   cart: DishCart[];
   isLoadingDishes?: boolean;
   fetchDishes: () => void;
 }
 
-const Home: React.FC<Props> = ({dishes, AddDishToCart, cart, isLoadingDishes = false, fetchDishes}) => {
+const Home: React.FC<Props> = ({dishes, cart, isLoadingDishes = false, fetchDishes}) => {
 
   const deleteDish = useCallback(async (id: string) => {
     try {
@@ -32,7 +31,7 @@ const Home: React.FC<Props> = ({dishes, AddDishToCart, cart, isLoadingDishes = f
         <div className="row justify-content-between">
           <div className="col col-md-5 mb-2">
             {dishes.length > 0 ?
-              <Dishes dishes={dishes} addToCart={AddDishToCart} deleteDish={deleteDish} />
+              <Dishes dishes={dishes} deleteDish={deleteDish} />
               : <h3>No dishes</h3>
             }
           </div>

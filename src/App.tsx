@@ -76,28 +76,11 @@ const App = () => {
     void updateCart();
   }, [updateCart]);
 
-  const addDishToCart = (dish: IDish) => {
-    setCart(prevState => {
-      const indexDish = prevState.findIndex(dishCart => dishCart.dish === dish);
-
-      if (indexDish === -1) {
-        return [...prevState, {dish, amount: 1}];
-      } else {
-        const cartCopy = [...prevState];
-        const copyDishCart = {...cartCopy[indexDish]};
-        copyDishCart.amount++;
-        cartCopy[indexDish] = copyDishCart;
-
-        return [...cartCopy];
-      }
-    });
-  };
-
   return (
     <>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home dishes={dishes} AddDishToCart={addDishToCart} cart={cart} isLoadingDishes={loading} fetchDishes={fetchDishes}/>}/>
+          <Route path="/" element={<Home dishes={dishes} cart={cart} isLoadingDishes={loading} fetchDishes={fetchDishes}/>}/>
           <Route path="/newDish" element={<NewDish />}/>
           <Route path="/editDish/:id" element={<EditDish />}/>
           <Route path="/checkout" element={<CheckOut cart={cart}/>}>
