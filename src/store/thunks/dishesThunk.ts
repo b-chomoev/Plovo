@@ -53,3 +53,10 @@ export const getOneDishById = createAsyncThunk<ApiDish | null, string>(
     return response.data;
   }
 );
+
+export const editDish = createAsyncThunk<void, {dishId: string, dish: ApiDish}>(
+  'dishes/editDish',
+  async ({dishId, dish}) => {
+    await axiosAPI.put(`dishes/${dishId}.json`, {...dish});
+  }
+);
