@@ -7,6 +7,7 @@ interface DishState {
   dishes: IDish[];
   oneDish: ApiDish | null;
   isFetchingLoading: boolean;
+  isOneFetchingLoading: boolean;
   isDeleteLoading: boolean | string;
   isCreateLoading: boolean;
   isEditLoading: boolean;
@@ -16,6 +17,7 @@ const initialState: DishState = {
   dishes: [],
   oneDish: null,
   isFetchingLoading: false,
+  isOneFetchingLoading: false,
   isDeleteLoading: false,
   isCreateLoading: false,
   isEditLoading: false,
@@ -23,6 +25,7 @@ const initialState: DishState = {
 
 export const selectDishes = (state: RootState) => state.dishes.dishes;
 export const selectFetchDishesLoading = (state: RootState) => state.dishes.isFetchingLoading;
+export const selectOneFetchDishLoading = (state: RootState) => state.dishes.isOneFetchingLoading;
 export const selectCreateDishLoading = (state: RootState) => state.dishes.isCreateLoading;
 export const selectOneDish = (state: RootState) => state.dishes.oneDish;
 export const selectEditDishLoading = (state: RootState) => state.dishes.isEditLoading;
@@ -62,15 +65,15 @@ export const dishesSlice = createSlice({
         state.isCreateLoading = false;
       })
       .addCase(getOneDishById.pending, (state) => {
-        state.isFetchingLoading = true;
+        state.isOneFetchingLoading = true;
         state.oneDish = null;
       })
       .addCase(getOneDishById.fulfilled, (state, action: PayloadAction<ApiDish | null>) => {
-        state.isFetchingLoading = false;
+        state.isOneFetchingLoading = false;
         state.oneDish = action.payload;
       })
       .addCase(getOneDishById.rejected, state => {
-        state.isFetchingLoading = false;
+        state.isOneFetchingLoading = false;
       })
       .addCase(editDish.pending, (state) => {
         state.isEditLoading = true;

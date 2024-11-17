@@ -3,16 +3,21 @@ import { useCallback, useEffect } from 'react';
 import { ApiDish } from '../../types';
 import DishForm from '../../components/DishForm/DishForm';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectEditDishLoading, selectFetchDishesLoading, selectOneDish } from '../../store/slices/dishesSlice';
+import {
+  selectEditDishLoading,
+  selectOneDish,
+  selectOneFetchDishLoading
+} from '../../store/slices/dishesSlice';
 import { editDish, getOneDishById } from '../../store/thunks/dishesThunk';
 import { toast } from 'react-toastify';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const EditDish = () => {
   const navigate = useNavigate();
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const dish = useAppSelector(selectOneDish);
-  const fetchLoading = useAppSelector(selectFetchDishesLoading);
+  const fetchLoading = useAppSelector(selectOneFetchDishLoading);
   const editLoading = useAppSelector(selectEditDishLoading);
 
   const getDishById = useCallback(async () => {
@@ -33,10 +38,14 @@ const EditDish = () => {
     }
   };
 
-  return dish && (
-    <>
-      <DishForm addNewDish={edit} existingDish={dish} isEdit={true} isLoading={fetchLoading || editLoading}/>
-    </>
+  return (
+    <div>
+      {fetchLoading ? <Spinner /> :
+        <>
+          {dish ? <DishForm addNewDish={edit} existingDish={dish} isEdit={true} isLoading={editLoading} /> : navigate('/')}
+        </>
+      }
+    </div>
   );
 };
 
