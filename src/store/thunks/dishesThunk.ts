@@ -6,7 +6,7 @@ import { updateCart } from '../slices/cartSlice';
 export const fetchAllDishes = createAsyncThunk<IDish[], void>(
   'dishes/fetchAllDishes',
   async (_arg, thunkAPI) => {
-    const response: {data: DishesList | null} = await axiosAPI('dishes.json');
+    const response: { data: DishesList | null } = await axiosAPI('dishes.json');
     const dishesList = response.data;
 
     if (dishesList === null) {
@@ -38,5 +38,18 @@ export const createDish = createAsyncThunk<void, ApiDish>(
   'dishes/createDish',
   async (dish) => {
     await axiosAPI.post('dishes.json', {...dish});
+  }
+);
+
+export const getOneDishById = createAsyncThunk<ApiDish | null, string>(
+  'dishes/getOneDishById',
+  async (id) => {
+    const response = await axiosAPI.get<ApiDish | null>(`dishes/${id}.json`);
+
+    if (!response.data) {
+      return null;
+    }
+
+    return response.data;
   }
 );

@@ -1,42 +1,42 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import axiosAPI from '../../axiosAPI';
 import { ApiDish } from '../../types';
 import DishForm from '../../components/DishForm/DishForm';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectFetchDishesLoading, selectOneDish } from '../../store/slices/dishesSlice';
+import { getOneDishById } from '../../store/thunks/dishesThunk';
 
 const EditDish = () => {
-  const [dish, setDish] = useState<ApiDish | null>(null);
-  const [editLoading, setEditLoading] = useState(false);
   const navigate = useNavigate();
   const {id} = useParams();
+  const dispatch = useAppDispatch();
+  const dish = useAppSelector(selectOneDish);
+  const editLoading = useAppSelector(selectFetchDishesLoading);
 
-  const getOneDishById = useCallback(async () => {
-    const response: {data: ApiDish} = await axiosAPI(`dishes/${id}.json`);
-    if (response.data) {
-      setDish(response.data);
+  const getDishById = useCallback(async () => {
+    if (id) {
+      dispatch(getOneDishById(id));
     }
-  }, [id]);
+  }, [dispatch, id]);
 
   useEffect(() => {
-    void getOneDishById();
-  }, [getOneDishById]);
+    void getDishById();
+  }, [getDishById]);
 
-  const addNewDish = async  (dish: ApiDish) => {
+  const editDish = async  (dish: ApiDish) => {
     console.log(dish);
     try {
-      setEditLoading(true);
       await axiosAPI.put(`dishes/${id}.json`, dish);
       navigate('/');
     } catch (e) {
       console.error(e);
-    } finally {
-      setEditLoading(false);
     }
   };
 
   return dish && (
     <>
-      <DishForm addNewDish={addNewDish} existingDish={dish} isEdit={true} isLoading={editLoading}/>
+      <DishForm addNewDish={editDish} existingDish={dish} isEdit={true} isLoading={editLoading}/>
     </>
   );
 };

@@ -1,10 +1,11 @@
-import { IDish } from '../../types';
+import { ApiDish, IDish } from '../../types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createDish, deleteOneDish, fetchAllDishes } from '../thunks/dishesThunk';
+import { createDish, deleteOneDish, fetchAllDishes, getOneDishById } from '../thunks/dishesThunk';
 import { RootState } from '../../app/store';
 
 interface DishState {
   dishes: IDish[];
+  oneDish: ApiDish | null;
   isFetchingLoading: boolean;
   isDeleteLoading: boolean | string;
   isCreateLoading: boolean;
@@ -12,6 +13,7 @@ interface DishState {
 
 const initialState: DishState = {
   dishes: [],
+  oneDish: null,
   isFetchingLoading: false,
   isDeleteLoading: false,
   isCreateLoading: false,
@@ -20,6 +22,7 @@ const initialState: DishState = {
 export const selectDishes = (state: RootState) => state.dishes.dishes;
 export const selectFetchDishesLoading = (state: RootState) => state.dishes.isFetchingLoading;
 export const selectCreateDishLoading = (state: RootState) => state.dishes.isCreateLoading;
+export const selectOneDish = (state: RootState) => state.dishes.oneDish;
 
 export const dishesSlice = createSlice({
   name: 'dishes',
@@ -54,6 +57,17 @@ export const dishesSlice = createSlice({
       })
       .addCase(createDish.rejected, state => {
         state.isCreateLoading = false;
+      })
+      .addCase(getOneDishById.pending, (state) => {
+        state.isFetchingLoading = true;
+        state.oneDish = null;
+      })
+      .addCase(getOneDishById.fulfilled, (state, action: PayloadAction<ApiDish | null>) => {
+        state.isFetchingLoading = false;
+        state.oneDish = action.payload;
+      })
+      .addCase(getOneDishById.rejected, state => {
+        state.isFetchingLoading = false;
       });
   }
 });
