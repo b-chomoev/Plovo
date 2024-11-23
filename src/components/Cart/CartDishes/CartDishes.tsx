@@ -1,5 +1,5 @@
 import React from 'react';
-import CartItem from '../CartItem.tsx';
+import CartItem from '../CartItem';
 import { DishCart } from '../../../types';
 
 interface Props {

@@ -1,5 +1,5 @@
 import React from 'react';
-import BackDrop from '../BackDrop/BackDrop.tsx';
+import BackDrop from '../BackDrop/BackDrop';
 
 interface Props extends React.PropsWithChildren {
   show: boolean;

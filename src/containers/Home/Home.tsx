@@ -33,7 +33,7 @@ const Home = () => {
           <div className="col col-md-5 mb-2">
             {dishes.length > 0 ?
               <Dishes dishes={dishes} deleteDish={deleteDish}/>
-              : <h3>No dishes</h3>
+              : <h3>No dishes yet</h3>
             }
           </div>
           <div className="col col-md-5 mb-2">

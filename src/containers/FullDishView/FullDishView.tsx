@@ -6,7 +6,6 @@ import { IOrderAPI } from '../../types';
 const FullDishView = () => {
   const params = useParams();
   useEffect(() => {
-    console.log(params);
     axiosAPI<IOrderAPI>('orders/' + params.dishId + '.json');
   }, [params]);
 

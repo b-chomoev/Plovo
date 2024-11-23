@@ -17,7 +17,7 @@ const initialState = {
 };
 
 const DishForm: React.FC<Props> = ({ addNewDish, existingDish = initialState, isEdit = false, isLoading = false }) => {
-  const [newDish, setNewDish] =useState<IDishMutation>(existingDish);
+  const [newDish, setNewDish] = useState<IDishMutation>(existingDish);
 
   const changeDish = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setNewDish((prevState) => {
